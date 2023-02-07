@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import ListItem from './components/ListItem';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form>
+          <h1>글목록</h1>
+          <div className='List'>
+            <ListItem />
+          </div>
+          <input 
+            type="text"
+            value=""
+          />
+          <button type="submit">목록추가</button>
+      </form>
     </div>
   );
 }
