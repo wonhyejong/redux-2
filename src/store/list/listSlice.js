@@ -27,6 +27,31 @@ export const addList = createAsyncThunk(
 )
 
 
+export const deleteList = createAsyncThunk(
+  "DELETE_LIST",
+  async(id)=>{
+    try{
+        const res= await axios.delete(`http://localhost:5000/list/${id}`);
+        return id;
+    }catch(err){
+        console.log(err)
+    }
+  }
+)
+
+export const updateList = createAsyncThunk(
+  "UPDATE_LIST",
+  async({id,content})=>{
+    try{
+        const res= await axios.put(`http://localhost:5000/list/${id}`,{
+          content:content
+        });
+        return {id,content}
+    }catch(err){
+        console.log(err)
+    }
+  }
+)
 
 const initialState = {
     data:[],
@@ -47,6 +72,15 @@ export const listSlice = createSlice({
     builder.addCase(addList.fulfilled, (state, action) => {
           state.message = "새로운 리스트 추가 완료했습니다.";
           state.data.push(action.payload);
+    })
+    builder.addCase(deleteList.fulfilled, (state, action) => {
+      state.message = "삭제가 완료 되었습니다.";
+      state.data = state.data.filter(item=>item.id !== action.payload)
+    })
+    builder.addCase(updateList.fulfilled, (state, action) => {
+      state.message = "리스트가 수정 되었습니다.";
+      const num=state.data.findIndex(item => item.id === action.payload.id)
+      state.data.splice(num,1,action.payload); 
     })
   },
 })
