@@ -1,9 +1,9 @@
 import React from 'react';
 
-const listItem = () => {
+const listItem = ({content,id}) => {
     return (
         <div>
-            <h2>아이디:컨텐츠</h2>
+            <h2>{id}:{content}</h2>
             <input 
                 type="text" 
                 value=""  
